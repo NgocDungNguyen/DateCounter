@@ -1,4 +1,3 @@
-
 const cityTimeZones = [
     { name: "New York, USA", timeZone: "America/New_York" },
     { name: "Los Angeles, USA", timeZone: "America/Los_Angeles" },
@@ -27,10 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function makeSortable(container) {
     new Sortable(container, {
         animation: 150,
-        handle: '.handle',
+        handle: '.handle', // Specify the handle for dragging
         ghostClass: 'bg-gray-300'
     });
 }
+
 
 function addCounter() {
     const startDate = document.getElementById('startDatePicker').value;
@@ -52,7 +52,8 @@ function createCounterDiv(data) {
     const counterDiv = document.createElement('div');
     counterDiv.className = 'p-4 mt-4 bg-gray-200 rounded shadow fade-in flex justify-between items-center';
     counterDiv.innerHTML = `
-        <div class="handle">
+        <div class="handle"><i class="fas fa-grip-vertical"></i></div>
+        <div>
             <div>From: ${formatDate(data.startDate)}</div>
             <div>To: ${formatDate(data.endDate)}</div>
             <div>Days: ${calculateDays(data.startDate, data.endDate)}</div>
@@ -66,6 +67,7 @@ function createCounterDiv(data) {
     `;
     return counterDiv;
 }
+
 
 function addDayNote() {
     const selectedDay = document.getElementById('dayPicker').value;
@@ -188,6 +190,7 @@ function updateClock(city) {
     update();
     setInterval(update, 1000);
 }
+
 function speakText(text) {
     const speech = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(speech);
@@ -207,27 +210,66 @@ function toggleTheme() {
     }
 }
 
-function removeFromLocal(key, index) {
-try {
-let items = JSON.parse(localStorage.getItem(key));
-if (!items) {
-    console.error("Error: No items found in local storage for key:", key);
-    return;
-}
-items.splice(index, 1);
-localStorage.setItem(key, JSON.stringify(items));
-} catch (error) {
-console.error("Error managing local storage:", error);
-}
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        loadLocalStorage();
+        makeSortable(document.getElementById('counters'));
+        makeSortable(document.getElementById('dayNotes'));
+        makeSortable(document.getElementById('clocks'));
+    } catch (error) {
+        console.error("Error initializing the application:", error);
+    }
+});
+
+function loadLocalStorage() {
+    try {
+        // Load counters
+        const counters = JSON.parse(localStorage.getItem('counters')) || [];
+        counters.forEach(counter => {
+            const counterDiv = createCounterDiv(counter);
+            document.getElementById('counters').appendChild(counterDiv);
+        });
+
+        // Load day notes
+        const dayNotes = JSON.parse(localStorage.getItem('dayNotes')) || [];
+        dayNotes.forEach(note => {
+            const dayNoteDiv = createDayNoteDiv(note);
+            document.getElementById('dayNotes').appendChild(dayNoteDiv);
+        });
+
+        // Load clocks
+        const clocks = JSON.parse(localStorage.getItem('clocks')) || [];
+        clocks.forEach(clock => {
+            const clockDiv = createClockDiv(clock);
+            document.getElementById('clocks').appendChild(clockDiv);
+            updateClock({ name: clock.name, timeZone: clock.timeZone });
+        });
+    } catch (error) {
+        console.error("Failed to load data from local storage:", error);
+    }
 }
 
 function saveToLocal(key, data) {
-try {
-let items = JSON.parse(localStorage.getItem(key)) || [];
-items.push(data);
-localStorage.setItem(key, JSON.stringify(items));
-} catch (error) {
-console.error("Error saving to local storage:", error);
-alert("Failed to save data: Local storage might be full.");
+    try {
+        let items = JSON.parse(localStorage.getItem(key)) || [];
+        items.push(data);
+        localStorage.setItem(key, JSON.stringify(items));
+    } catch (error) {
+        console.error("Error saving to local storage:", error);
+        alert("Failed to save data: Local storage might be full or unavailable.");
+    }
 }
+
+function removeFromLocal(key, index) {
+    try {
+        let items = JSON.parse(localStorage.getItem(key));
+        if (!items) {
+            console.error("Error: No items found in local storage for key:", key);
+            return;
+        }
+        items.splice(index, 1);
+        localStorage.setItem(key, JSON.stringify(items));
+    } catch (error) {
+        console.error("Error managing local storage:", error);
+    }
 }
