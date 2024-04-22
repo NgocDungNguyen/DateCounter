@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Date and Time Utility</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+</head>
+<body class="font-sans leading-normal tracking-normal transition-colors duration-300">
+    <div class="container mx-auto px-4 md:px-0 max-w-4xl mt-10">
+        <label class="toggle-switch">
+            <input type="checkbox" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+        <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+            <h1 class="block w-full text-center text-gray-800 text-2xl font-bold mb-6">Professional Date and Time Utility</h1>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="startDatePicker">
+                    Start Date
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="date" id="startDatePicker">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="endDatePicker">
+                    End Date
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="date" id="endDatePicker">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="noteInput">
+                    Notes
+                </label>
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="noteInput" placeholder="Add notes here..."></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1" onclick="addCounter()">
+                    Add Date Range
+                </button>
+            </div>
+            <div id="counters" class="mt-6 sortable"></div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Day Notes</h2>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="dayPicker">
+                    Select Day and Time
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="datetime-local" id="dayPicker">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="dayNoteInput">
+                    Note for the Day
+                </label
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="dayNoteInput" placeholder="Enter note for selected day..."></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1" onclick="addDayNote()">
+                    Add Day Note
+                </button>
+            </div>
+            <div id="dayNotes" class="mt-6 sortable"></div>
+        </div>
+
+        <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4 relative dropdown">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="cityInput">
+                    City Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="text" id="cityInput" oninput="searchCity()" placeholder="Enter city name">
+                <div id="cityList" class="dropdown-menu"></div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1" onclick="addClock()">
+                    Add Clock
+                </button>
+            </div>
+            <div id="clocks" class="mt-6 sortable"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

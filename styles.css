@@ -1,0 +1,113 @@
+:root {
+    --bg-color: #f0f7ff;
+    --text-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-bg-color: #e2ebf6;
+    --priority-color: #4CAF50;
+    --priority-hover-bg-color: #C8E6C9;
+    --input-bg-color: #ffffff;
+    --input-text-color: #333;
+    --dropdown-bg-color: #ffffff;
+    --dropdown-text-color: #333;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a202c;
+    --text-color: #cbd5e0;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+    --hover-bg-color: #2d3748;
+    --priority-color: #48bb78;
+    --priority-hover-bg-color: #68d391;
+    --input-bg-color: #2d3748;
+    --input-text-color: #e2e8f0;
+    --dropdown-bg-color: #2d3748;
+    --dropdown-text-color: #e2e8f0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.shadow {
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.hover-bg {
+    background-color: var(--hover-bg-color);
+}
+
+.priority {
+    color: var(--priority-color);
+}
+
+.priority:hover {
+    background-color: var(--priority-hover-bg-color);
+}
+
+.handle {
+    cursor: grab;
+}
+
+input, textarea, button {
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.rounded {
+    border-color: var(--input-text-color);
+}
+
+.dropdown-menu {
+    background-color: var(--dropdown-bg-color);
+    color: var(--dropdown-text-color);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
