@@ -1,3 +1,4 @@
+
 :root {
     --bg-color: #f0f7ff;
     --text-color: #333;
@@ -9,19 +10,21 @@
     --input-text-color: #333;
     --dropdown-bg-color: #ffffff;
     --dropdown-text-color: #333;
+    --handle-text-color: #333;
 }
 
 [data-theme="dark"] {
-    --bg-color: #1a202c;
-    --text-color: #cbd5e0;
+    --bg-color: #2d3748;
+    --text-color: #e2e8f0;
     --shadow-color: rgba(255, 255, 255, 0.1);
-    --hover-bg-color: #2d3748;
+    --hover-bg-color: #4a5568;
     --priority-color: #48bb78;
     --priority-hover-bg-color: #68d391;
-    --input-bg-color: #2d3748;
+    --input-bg-color: #4a5568;
     --input-text-color: #e2e8f0;
-    --dropdown-bg-color: #2d3748;
+    --dropdown-bg-color: #4a5568;
     --dropdown-text-color: #e2e8f0;
+    --handle-text-color: #000000; /* Black text for handles in dark mode */
 }
 
 body {
@@ -48,6 +51,7 @@ body {
 
 .handle {
     cursor: grab;
+    color: var(--handle-text-color); /* Use variable for handle text color */
 }
 
 input, textarea, button {
